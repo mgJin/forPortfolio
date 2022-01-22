@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+	<resultMap type="boardVO" id="boardResult">
+		<result property ="level" column="level"/>
+		<result property ="articleNO" column="articleNO"/>
+		<result property="parentNO" column="parentNO"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="writeDate" column="writeDate"/>
+		<result property="imageFileName" column="imageFileName"/>
+		<result property="id" column="id"/>
+	</resultMap>
+	
+	<select id="selectAllArticleList" resultMap="boardResult">
+		<![CDATA[
+			SELECT level, articleNO, parentNO, title, content, writeDate, imageFileName, id 
+			from ad_board 
+			START WITH parentNO=0 
+			CONNECT BY PRIOR articleNO=parentNO 
+			ORDER SIBLINGS BY articleNO DESC 
+		]]>
+	</select>
+	
+	<select id="insertNewArticle" parameterType="java.util.Map">
+		<![CDATA[
+			insert into ad_board(articleNO, title, content, imageFileName,id)
+			values(#{articleNO}, #{title}, #{content}, #{imageFileName}, #{id})
+		]]>
+	</select>
+	
+	<select id="getNewArticleNO" resultType="int">
+		<![CDATA[
+			select nvl(max(articleNO),0)+1 from ad_board
+		]]>
+	</select>
+	
+	<select id="selectArticle" resultType="boardVO" parameterType="int">
+		<![CDATA[
+			select * from ad_board
+			where articleNO = #{articleNO}
+		]]>
+	</select>
+	
+	<delete id="deleteBoard" parameterType="int">
+		<![CDATA[
+			delete from ad_board
+			where articleNO in(
+			select articleNO from ad_board
+			start with articleNO = #{articleNO}
+			connect by prior articleNO=parentNO)
+		]]>
+	</delete>
+	
+	<update id="updateBoard" parameterType="java.util.Map">
+		update ad_board
+			set title=#{title},	 
+			content=#{content}
+			 <if test="imageFileName!='' and imageFileName!=null">
+			  , imageFileName=#{imageFileName}
+			</if>
+			where articleNO=#{articleNO}
+	
+	</update>
+</mapper>
