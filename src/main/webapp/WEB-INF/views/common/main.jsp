@@ -39,7 +39,7 @@
         }
         
         .main_image{
-        	width:80%;
+        	width:8"C:/Users/jmg94/Desktop/images/goods/banana_salad.jpg"0%;
         	height:500px;
         }
 </style>
@@ -49,25 +49,26 @@
 		<div id="containerA">
             <img src="${contextPath }/resources/image/main_salad.jpg" alt="main_image" class="main_image">
             
-
         </div>
+        <!-- 사진들 크기 맞추기 + 링크+ 제목  -->
         <div id="containerB">
+        
             <ul>
                 <li>
-                	<img alt="상품1" src="">                	
+                	<img alt="상품1" src="${contextPath }/resources/image/banana_salad.jpg">                	
                 </li>
                 
                 <li>
-                	<img alt="상품2" src="">
+                	<img alt="상품2" src="${contextPath }/resources/image/caesar_salad.jpg">
                 </li>
                 <li>
-                	<img alt="상품3" src="">
+                	<img alt="상품3" src="${contextPath }/resources/image/capreze_salad.jpg">
                 </li>
                 <li>
-                	<img alt="상품4" src="">
+                	<img alt="상품4" src="${contextPath }/resources/image/chicurry_salad.jpg">
                 </li>
                 <li>
-					<img alt="상품5" src="">                
+					<img alt="상품5" src="${contextPath }/resources/image/dubu_saessac_salad.jpg">  
                 </li>
             </ul>
         </div>
