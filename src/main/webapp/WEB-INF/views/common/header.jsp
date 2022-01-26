@@ -68,7 +68,7 @@
             <nav id="menunav">
                 <ul>
                     <li><a href="${contextPath }/board/listArticle.do">게시판</a></li><!-- 각각의 페이지로 가기 -->
-                    <li><a href="">제품</a></li>
+                    <li><a href="${contextPath }/goods/viewGoods.do">제품</a></li>
                     <c:if test="${member.authority eq 'admin' }"> 
                     	<li><a href="">회원관리</a></li>
                     </c:if>
